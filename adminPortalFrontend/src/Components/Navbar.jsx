@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
     <Sidebar/>
-    <div className="fixed w-full bg-black min-h-content text-white">
+    <div className="fixed w-full bg-black min-h-content text-white z-20">
       <div className="flex justify-between items-center px-4 py-2">
         <div className="text-2xl">
           <button className="bg-black text-white" onClick={()=>setToggleSidebar(!toggleSidebar)} >

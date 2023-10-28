@@ -2,9 +2,36 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import useAuth from '../Helpers/useAuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 export default function LogIn() {
+  const[email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  const {handleLogin,user} = useAuth()
   const [visibility, setVisibility] = useState(false);
+ const navigate = useNavigate()
+  const handleSignIn =  async(e)=>
+   {
+    try{
+    e.preventDefault()
+    await handleLogin(email,password)
+    console.log("Registration successful");
+    alert(user)
+    
+    }
+    catch(error)
+    {
+     console.log(error)
+     console.log("Registration failed");
+    }
+   }
+   useEffect(() => {
+    alert(user); // This will alert whenever the 'user' state changes
+  }, [user]);
+  
+
+
 
   return (
     <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
@@ -16,6 +43,7 @@ export default function LogIn() {
             id="email"
             type="email"
             placeholder="Email"
+            onChange={(e)=>setEmail(e.target.value)}
           />
         </div>
         <div className="mb-6">
@@ -24,6 +52,7 @@ export default function LogIn() {
             id="password"
             type={visibility ? "text" : "password"}
             placeholder="Password"
+            onChange={(e)=>setPassword(e.target.value)}
           />
           <button type="button" className='flex justify-center items-center ml-28 mt-3 hover:bg-black' onClick={()=>setVisibility(!visibility)}>
             {visibility ? <VisibilityIcon /> : <VisibilityOffIcon />}
@@ -37,9 +66,9 @@ export default function LogIn() {
         <div className="flex items-center justify-center">
           <button
             className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
+            type="submit" onClick ={handleSignIn}
           >
-            Sign In
+            Log In
           </button>
         </div>
       </form>

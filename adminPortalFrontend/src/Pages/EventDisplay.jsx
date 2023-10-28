@@ -6,7 +6,7 @@ export const EventDisplay = () => {
     const handleResize = () => {
       // Adjust the zoom level based on screen width
       if (window.innerWidth <= 640) {
-        setZoomLevel(0.5); // Set the zoom level for smaller screens
+        setZoomLevel(0.52); // Set the zoom level for smaller screens
       } else {
         setZoomLevel(1); // Set default zoom for larger screens
       }

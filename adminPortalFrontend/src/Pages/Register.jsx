@@ -2,12 +2,30 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import useAuth from '../Helpers/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const {handleRegistration} = useAuth()
   const [visibility, setVisibility] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+  const handleRegister =  async(e)=>
+   {
+    try{
+    e.preventDefault()
+    await handleRegistration(name,email,password)
+    console.log("Registration successful");
+    navigate("/")
+    }
+    catch(error)
+    {
+     console.log(error)
+     console.log("Registration failed");
+    }
+   }
 
   return (
     <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
@@ -52,6 +70,7 @@ export default function Register() {
           <button
             className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
+            onClick ={handleRegister}
           >
             Sign Up
           </button>
