@@ -18,7 +18,7 @@ export default function Register() {
     e.preventDefault()
     await handleRegistration(name,email,password)
     console.log("Registration successful");
-    navigate("/")
+    navigate("/eventPage")
     }
     catch(error)
     {

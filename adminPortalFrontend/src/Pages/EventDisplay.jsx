@@ -1,11 +1,24 @@
 import { useState, useEffect } from "react";
-
+import useAuth from "../Helpers/useAuthContext";
 export const EventDisplay = () => {
+  const {user,deletingEvent} = useAuth()
   const [zoomLevel, setZoomLevel] = useState(1);
   const [dataState, setDataState] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+   const handleDelete = async (id)=>
+   {
+    try
+    {
+   
+    await deletingEvent(id)
+    }
+    catch(error)
+    {
+     console.log(error);
+    }
+   }
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 640) {
@@ -83,8 +96,11 @@ export const EventDisplay = () => {
               <td className="px-6 py-4 whitespace-nowrap">{item.date}<br />{item.time}</td>
               <td className="px-6 py-4 whitespace-nowrap">{item.location}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-    
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                 { user?
+                  (<>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>handleDelete(item._id)}>Delete</button>
+            
+              </>) :(<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>{alert("You need to be logged in an admin to delete this event")}}>Delete</button>)}
               </td>
             </tr>
           ))}

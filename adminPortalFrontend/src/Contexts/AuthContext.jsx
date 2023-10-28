@@ -18,18 +18,16 @@ const AuthProvider = ({ children }) => {
       
 
       if (error) {
-        // Handle error (show message, etc.)
         console.error('Registration Error:', error);
         return;
       }
 
-      // Data contains the response from the server
       const { userId, token } = data;
   
 
       console.log('Registration Successful:', userId, token);
       setUser(token)
-      alert(user)
+      alert("You have successfully loged in as an admin")
     } catch (error) {
       // Handle fetch error
       console.error('Fetch Error:', error);
@@ -54,9 +52,6 @@ const AuthProvider = ({ children }) => {
 
       const { userId, token } = data;
          setUser(token) 
-      alert(token)
-      
-      
 
       console.log('Login Successful:', userId, token);
     } catch (error) {
@@ -67,15 +62,15 @@ const AuthProvider = ({ children }) => {
   const handleEventAdding = async ({ event }) => {
     try {
       const url = 'https://api-admin-dcc.onrender.com/events/add';
-      const token = user; // Assuming user contains the token
+      const token = user; 
   
       const options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token, // Assuming token format is without 'Bearer'
+          Authorization: token, 
         },
-        body: JSON.stringify(event), // Ensure the event details are properly formatted
+        body: JSON.stringify(event), 
       };
   
       const response = await fetch(url, options);
@@ -93,13 +88,40 @@ const AuthProvider = ({ children }) => {
       console.error('Fetch Error:', error);
     }
   };
+
+  const deletingEvent = async (id) => { 
+    try {
+
+      const url = `https://api-admin-dcc.onrender.com/events/${id}`; 
+      const token = user; 
   
+      const options = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }
+    
+      };
   
-
-
-
+      const response = await fetch(url, options);
+      const data = await response.json();
+  
+      console.log('Response from server:', data);
+  
+      if (!response.ok) {
+        console.error('Failed to delete the event');
+        return;
+      }
+  
+      console.log('Successfully deleted the data from the backend:', data);
+    } catch (error) {
+      console.error('Fetch Error:', error);
+    }
+  };
+  
   return (
-    <AuthContext.Provider value={{ user, setUser, handleRegistration,handleLogin,handleEventAdding }}>
+    <AuthContext.Provider value={{ user, setUser, handleRegistration,handleLogin,handleEventAdding,deletingEvent }}>
       {children}
     </AuthContext.Provider>
   );

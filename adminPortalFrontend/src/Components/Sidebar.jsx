@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom"
 import useMainContext from "../Helpers/useMainContext"
 const Sidebar = () => {
   const {toggleSidebar,setToggleSidebar} = useMainContext()
   
     return (
-      <>
+      <>   
       {toggleSidebar ? ( 
     
       <div className="fixed w-64 bg-black h-screen text-white z-10">
@@ -11,35 +12,35 @@ const Sidebar = () => {
           <button className="border-b border-gray-500 text-white text-xl font-semibold py-2" onClick={()=>setToggleSidebar(false)}>
            
           </button>
+          <Link
+            to="/eventDisplay"
+            className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
+          >
+            DCC EVENTS
+          </Link>
+          <Link
+            to="/eventPage"
+            className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
+          >
+          DCC EVENT FORM
+          </Link>
           <a
             href="/"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
-            Item1
+            DCC NITA WEBSITE
           </a>
           <a
             href="/"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
-            Item2
+            CP HUB
           </a>
           <a
             href="/"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
-            Item3
-          </a>
-          <a
-            href="/"
-            className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
-          >
-            Item4
-          </a>
-          <a
-            href="/"
-            className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
-          >
-            Item5
+            OTHER RESOURCES
           </a>
          
         </div>

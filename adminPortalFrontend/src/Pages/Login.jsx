@@ -17,7 +17,7 @@ export default function LogIn() {
     e.preventDefault()
     await handleLogin(email,password)
     console.log("Registration successful");
-    alert(user)
+    navigate("/eventPage")
     
     }
     catch(error)
@@ -26,9 +26,7 @@ export default function LogIn() {
      console.log("Registration failed");
     }
    }
-   useEffect(() => {
-    alert(user); // This will alert whenever the 'user' state changes
-  }, [user]);
+  
   
 
 

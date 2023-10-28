@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function EventPage() {
   const navigate = useNavigate()
-  const {handleEventAdding} = useAuth()
+  const {handleEventAdding,user} = useAuth()
   const [event, setEvent] = useState({
     eventHeading: '',
     eventDesc: '',
@@ -121,17 +121,26 @@ export default function EventPage() {
           />
         </div>
         <div className="flex items-center justify-center">
-          <button onClick={handleAddingEvent}
+        <> { user ?
+          (<button onClick={handleAddingEvent}
             className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            
-          </button>
+            ADD EVENT
+          </button>):
+
+          (<Link to="/signIn"
+            className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            SignIn First
+          </Link>)
+         } </>
         </div>
       </form>
       <div className="text-center">
         <p className="text-gray-600 text-sm">
-          Back to{' '}
+          
           {/* <Link to="/" className="text-blue-500 hover:text-red-500 z-40">
             Home
           </Link> */}

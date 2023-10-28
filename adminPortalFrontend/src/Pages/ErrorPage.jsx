@@ -9,10 +9,7 @@ const ErrorPage = () => {
     await loadFull(main);
   };
 
-  const particlesLoaded = (container) => {
-    console.log(container);
-  };
-
+  
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="text-6xl font-extrabold text-orange-400">Error: 404</div>

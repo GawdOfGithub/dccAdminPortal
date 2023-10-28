@@ -20,7 +20,7 @@ const Navbar = () => {
           <span>EventForm</span>
         </Link>
         <button className="bg-black text-white">
-          <span>🔍</span>
+          <span><img src="dcc.svg" style={{height:"30px",width:"30px"}}></img></span>
         </button>
         <div className='flex'>
           <span>👤</span>
