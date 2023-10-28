@@ -1,7 +1,10 @@
 import useMainContext from "../Helpers/useMainContext";
 import Sidebar from "./Sidebar";
+import useAuth from "../Helpers/useAuthContext";
+
 import { Link } from "react-router-dom";
 const Navbar = () => {
+  const{user,setUser} = useAuth()
     const{toggleSidebar,setToggleSidebar} = useMainContext()
   return (
     <>
@@ -21,9 +24,22 @@ const Navbar = () => {
         </button>
         <div className='flex'>
           <span>👤</span>
+          
+          {
+            !user?
+            (<>
           <Link to="/signIn" className="bg-black text-white font-semibold">
             <span>SignIn</span>
           </Link>
+          </>):<>
+          
+           
+            <button className="bg-black text-white font-semibold" onClick={()=>setUser(null)}>
+            <span>Logut</span>
+          </button>
+           
+          
+          </>}
         </div>
       </div>
     </div>;

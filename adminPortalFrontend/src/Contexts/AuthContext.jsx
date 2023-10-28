@@ -4,7 +4,7 @@ const AuthContext = createContext();
 import useFetch from '../Helpers/useFetceher';
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState("hello");
+  const [user, setUser] = useState(null);
   const  fetchData  = useFetch();
   const handleRegistration = async (username,password,email) => {
     const url = 'https://api-admin-dcc.onrender.com/user/signup';
