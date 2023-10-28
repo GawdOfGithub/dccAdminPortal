@@ -1,12 +1,37 @@
-
-import Navbar from './Components/Navbar'
-import Sidebar from './Components/Sidebar'
-
-export default function App() {
+import React from 'react'
+import AppLayout from './AppLayout'
+import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+import Home from './Pages/Home'
+import LogIn from './Pages/Login'
+import Register from './Pages/Register'
+import ErrorPage from './Pages/ErrorPage'
+ const App = () => {
+  const router = createBrowserRouter([
+    {
+       element:<AppLayout/>,
+      errorElement:<ErrorPage/>,
+      children:[
+        {
+          path:'/',
+          element:<Home/>, 
+        },
+       
+              {
+              path:'/signIn',
+              element:<LogIn/>
+              },
+      
+          
+                {
+                  path:'/Register',
+                  element:<Register/>
+                  }
+                  
+      ]
+    }
+  ])
   return (
-    <>
-    <div><Navbar/></div>
-    <div><Sidebar/></div>
-    </>
+    <RouterProvider router={router}/>
   )
 }
+export default App

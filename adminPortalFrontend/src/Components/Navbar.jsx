@@ -1,5 +1,6 @@
 import useMainContext from "../Helpers/useMainContext";
 import Sidebar from "./Sidebar";
+import { Link } from "react-router-dom";
 const Navbar = () => {
     const {setToggleSidebar} = useMainContext()
   return (
@@ -12,17 +13,17 @@ const Navbar = () => {
             <span>☰</span>
           </button>
         </div>
-        <a href="/" className="text-yellow-500 text-2xl font-bold">
+        <Link to="/" className="text-yellow-500 text-2xl font-bold">
           <span>My Site</span>
-        </a>
+        </Link>
         <button className="bg-black text-white">
           <span>🔍</span>
         </button>
         <div className='flex'>
           <span>👤</span>
-          <a href="/signIn" className="bg-black text-white font-semibold">
+          <Link to="/signIn" className="bg-black text-white font-semibold">
             <span>SignIn</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>;
