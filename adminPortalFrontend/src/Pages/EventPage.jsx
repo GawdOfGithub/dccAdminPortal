@@ -1,21 +1,40 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../Helpers/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function EventPage() {
+  const navigate = useNavigate()
+  const {handleEventAdding} = useAuth()
   const [event, setEvent] = useState({
-    heading: '',
-    description: '',
-    date: '',
-    time: '',
-    location: '',
-    imageURL: '',
-    link: '',
+    eventHeading: '',
+    eventDesc: '',
+    eventDate: '',
+    eventTime: '',
+    eventLocation: '',
+    eventImgUrl: '',
+    eventLink: '',
   });
 
+  // eventHeading,eventDesc,eventDate,eventTime,eventLocation,eventImgUrl,eventLink
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent({ ...event, [name]: value });
   };
+
+  const handleAddingEvent =  async(e)=>
+  {
+   try{
+   e.preventDefault()
+   await handleEventAdding({event})
+   
+   }   
+   catch(error)
+   {
+    console.log(error)
+    console.log("Registration failed");
+   }
+  }
 
   return (
     <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
@@ -26,21 +45,21 @@ export default function EventPage() {
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-            id="heading"
+            id="eventHeading"
             type="text"
-            name="heading"
+            name="eventHeading"
             placeholder="Event Heading"
-            value={event.heading}
+            value={event.eventHeading}
             onChange={handleChange}
           />
         </div>
         <div className="mb-4">
           <textarea
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-            id="description"
-            name="description"
+            id="eventDesc"
+            name="eventDesc"
             placeholder="Event Description"
-            value={event.description}
+            value={event.eventDesc}
             onChange={handleChange}
           />
         </div>
@@ -48,22 +67,22 @@ export default function EventPage() {
           <div className="mb-4">
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-              id="date"
+              id="eventDate"
               type="date"
-              name="date"
+              name="eventDate"
               placeholder="Event Date"
-              value={event.date}
+              value={event.eventDate}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-              id="time"
+              id="eventTime"
               type="time"
-              name="time"
+              name="eventTime"
               placeholder="Event Time"
-              value={event.time}
+              value={event.eventTime}
               onChange={handleChange}
             />
           </div>
@@ -71,51 +90,51 @@ export default function EventPage() {
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-            id="location"
+            id="eventLocation"
             type="text"
-            name="location"
+            name="eventLocation"
             placeholder="Event Location"
-            value={event.location}
+            value={event.eventLocation}
             onChange={handleChange}
           />
         </div>
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-            id="imageURL"
+            id="eventImageURL"
             type="text"
-            name="imageURL"
+            name="eventImgUrl"
             placeholder="Event Image URL"
-            value={event.imageURL}
+            value={event.eventImgUrl}
             onChange={handleChange}
           />
         </div>
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
-            id="link"
+            id="eventLink"
             type="text"
-            name="link"
+            name="eventLink"
             placeholder="Event Link"
-            value={event.link}
+            value={event.eventLink}
             onChange={handleChange}
           />
         </div>
         <div className="flex items-center justify-center">
-          <button
+          <button onClick={handleAddingEvent}
             className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Create Event
+            
           </button>
         </div>
       </form>
       <div className="text-center">
         <p className="text-gray-600 text-sm">
           Back to{' '}
-          <Link to="/" className="text-blue-500 hover:text-red-500 z-40">
+          {/* <Link to="/" className="text-blue-500 hover:text-red-500 z-40">
             Home
-          </Link>
+          </Link> */}
         </p>
       </div>
     </div>

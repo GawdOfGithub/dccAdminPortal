@@ -1,52 +1,64 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+
 export const EventDisplay = () => {
-  const [zoomLevel, setZoomLevel] = useState(1); // Initial zoom level
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [dataState, setDataState] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
-      // Adjust the zoom level based on screen width
       if (window.innerWidth <= 640) {
-        setZoomLevel(0.52); // Set the zoom level for smaller screens
+        setZoomLevel(0.52);
       } else {
-        setZoomLevel(1); // Set default zoom for larger screens
+        setZoomLevel(1);
       }
     };
     window.addEventListener('resize', handleResize);
-
-    // Initial call to set the zoom level
     handleResize();
 
-    // Clean up the event listener
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = 'https://api-admin-dcc.onrender.com/events';
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setDataState(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures it runs only once on initial render
+
   const style = {
-    transform: `scale(${zoomLevel})`, // Apply scale based on the zoom level
-    transformOrigin: 'top left', // Set the origin of the transformation
+    transform: `scale(${zoomLevel})`,
+    transformOrigin: 'top left',
   };
 
-  const data = [
-    {
-      heading: "Madhyam 3.0",
-      description: "Ignite Your Tech Journey at the orientation event for first-year students, brought to you by the powerhouse clubs DCC and GDSC at NITA! Join us for an exciting ride through boundless opportunities and tech innovation. Get ready to embark on this exhilarating journey and witness the unveiling of DCC & GDSC Orientation 2023, exclusively for 1st years.",
-      date: "September 3rd, Sunday",
-      time: "2:30 - 5:30 PM",
-      location: "Visvesvarya Auditorium",
-      imageUrl: "https://res.cloudinary.com/dhzod7y8u/image/upload/v1693606077/final_maadhyam_p2ktr5.jpg"
-    },
-    {
-      heading: "Madhyam 3.0",
-      description: "Ignite Your Tech Journey at the orientation event for first-year students, brought to you by the powerhouse clubs DCC and GDSC at NITA! Join us for an exciting ride through boundless opportunities and tech innovation. Get ready to embark on this exhilarating journey and witness the unveiling of DCC & GDSC Orientation 2023, exclusively for 1st years.",
-      date: "September 3rd, Sunday",
-      time: "2:30 - 5:30 PM",
-      location: "Visvesvarya Auditorium",
-      imageUrl: "https://res.cloudinary.com/dhzod7y8u/image/upload/v1693606077/final_maadhyam_p2ktr5.jpg"
-    },
-  ];
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8 "style={style}>
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  
+    return (
+     <>
+      <div className="max-w-4xl mx-auto px-4 py-8 "style={style}>
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
@@ -57,11 +69,11 @@ export const EventDisplay = () => {
           </tr>
         </thead>
         <tbody className="bg-slate-300 divide-y divide-gray-200 ">
-          {data.map((item, index) => (
+          {dataState.map((item, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
-                  <img src={item.imageUrl} alt={item.heading} className="w-10 h-10 rounded-full" />
+                  <img src="dcc.svg" alt={item.heading} className="w-10 h-10 rounded-full" />
                   <div className="ml-4">
                     <div className="text-sm font-medium text-gray-900">{item.heading}</div>
                     {/* <div className="text-sm text-gray-500">{item.description}</div> */}
@@ -79,5 +91,9 @@ export const EventDisplay = () => {
         </tbody>
       </table>
     </div>
-  );
-};
+     </>
+    );
+  }
+  
+  
+

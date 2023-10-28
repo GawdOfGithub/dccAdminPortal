@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+
 
 const useFetch = () => {
   const fetchData = async (url, options = {}) => {
-    const { method = 'GET', body, token, headers: customHeaders } = options;
+    const { method = 'GET', body, headers: customHeaders } = options;
+    const token = options.token;
 
     const defaultHeaders = {
       'Content-Type': 'application/json',
-      // Include the session token in the headers if available
       Authorization: token ? `Bearer ${token}` : '',
     };
 
