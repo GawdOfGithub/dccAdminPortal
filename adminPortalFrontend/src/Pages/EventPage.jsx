@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 export default function EventPage() {
-  
   const [event, setEvent] = useState({
     heading: '',
     description: '',
@@ -70,7 +68,39 @@ export default function EventPage() {
             />
           </div>
         </div>
-        
+        <div className="mb-4">
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
+            id="location"
+            type="text"
+            name="location"
+            placeholder="Event Location"
+            value={event.location}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
+            id="imageURL"
+            type="text"
+            name="imageURL"
+            placeholder="Event Image URL"
+            value={event.imageURL}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
+            id="link"
+            type="text"
+            name="link"
+            placeholder="Event Link"
+            value={event.link}
+            onChange={handleChange}
+          />
+        </div>
         <div className="flex items-center justify-center">
           <button
             className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
