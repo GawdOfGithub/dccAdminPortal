@@ -13,7 +13,7 @@ const Navbar = () => {
             <span>☰</span>
           </button>
         </div>
-        <Link to="/" className="text-yellow-500 text-2xl font-bold">
+        <Link to="/eventPage" className="text-yellow-500 text-2xl font-bold">
           <span>My Site</span>
         </Link>
         <button className="bg-black text-white">

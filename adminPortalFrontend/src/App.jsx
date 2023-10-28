@@ -1,10 +1,11 @@
-import React from 'react'
+
 import AppLayout from './AppLayout'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import Home from './Pages/Home'
 import LogIn from './Pages/Login'
 import Register from './Pages/Register'
 import ErrorPage from './Pages/ErrorPage'
+import EventPage from './Pages/EventPage'
  const App = () => {
   const router = createBrowserRouter([
     {
@@ -23,8 +24,12 @@ import ErrorPage from './Pages/ErrorPage'
       
           
                 {
-                  path:'/Register',
+                  path:'/register',
                   element:<Register/>
+                  },
+                  {
+                  path:'/eventPage',
+                  element:<EventPage/>
                   }
                   
       ]
