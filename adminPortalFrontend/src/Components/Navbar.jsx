@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const { user, setUser } = useAuth();
+  const { user, setUser,logout } = useAuth();
   const { toggleSidebar, setToggleSidebar } = useMainContext();
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const Navbar = () => {
                     <span>SignIn</span>
                   </Link>
                 ) : (
-                  <button className="bg-black text-white font-semibold" onClick={() => setUser(null)}>
+                  <button className="bg-black text-white font-semibold" onClick={logout}>
                     <span>Logout</span>
                   </button>
                 )}

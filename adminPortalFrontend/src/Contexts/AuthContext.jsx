@@ -128,9 +128,13 @@ const AuthProvider = ({ children }) => {
       console.error('Fetch Error:', error);
     }
   };
+  const logout = () => {
+    localStorage.removeItem('myValue'); 
+    setUser(''); 
+  };
   
   return (
-    <AuthContext.Provider value={{ user, setUser, handleRegistration,handleLogin,handleEventAdding,deletingEvent }}>
+    <AuthContext.Provider value={{ user, setUser, handleRegistration,handleLogin,handleEventAdding,deletingEvent,logout }}>
       {children}
     </AuthContext.Provider>
   );

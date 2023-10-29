@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useAuth from "../Helpers/useAuthContext";
+import Loader from "../Components/Loader";
 export const EventDisplay = () => {
   const {user,deletingEvent} = useAuth()
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -62,7 +63,7 @@ export const EventDisplay = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>;
   }
 
   if (error) {

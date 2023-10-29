@@ -7,6 +7,7 @@ import Register from './Pages/Register'
 import ErrorPage from './Pages/ErrorPage'
 import EventPage from './Pages/EventPage'
 import { EventDisplay } from './Pages/EventDisplay'
+
  const App = () => {
   const router = createBrowserRouter([
     {

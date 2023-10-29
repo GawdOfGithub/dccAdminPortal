@@ -5,7 +5,9 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import Loader from '../Components/Loader';
 export default function LogIn() {
+  const [loading, setLoading] = useState(false);
   const[email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const {handleLogin,user} = useAuth()
@@ -14,6 +16,7 @@ export default function LogIn() {
   const handleSignIn =  async(e)=>
    {
     try{
+      setLoading(true)
     e.preventDefault()
     await handleLogin(email,password)
     console.log("Registration successful");
@@ -25,10 +28,19 @@ export default function LogIn() {
      console.log(error)
      console.log("Registration failed");
     }
+    finally
+    {
+      setLoading(false)
+    }
    }
   
   
-
+if(loading)
+{
+  return(
+    <Loader/>
+  )
+}
 
 if(user)
 {

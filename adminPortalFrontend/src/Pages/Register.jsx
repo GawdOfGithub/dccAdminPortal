@@ -4,8 +4,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Components/Loader';
 
 export default function Register() {
+  const [loading, setLoading] = useState(false);
   const {handleRegistration,user} = useAuth()
   const [visibility, setVisibility] = useState(false);
   const [name, setName] = useState("");
@@ -16,8 +18,10 @@ export default function Register() {
    {
     try{
     e.preventDefault()
+    setLoading(true)
     await handleRegistration(name,email,password)
     console.log("Registration successful");
+  
     navigate("/eventPage")
     }
     catch(error)
@@ -25,6 +29,20 @@ export default function Register() {
      console.log(error)
      console.log("Registration failed");
     }
+   finally
+   {
+    setLoading(false)
+   }
+   }
+
+
+   if(loading)
+   {
+    return(
+      <>
+      <Loader/>
+      </>
+    )
    }
    if(user)
    {
@@ -53,6 +71,7 @@ export default function Register() {
       </div>
     </div>)
    }
+   
 
   return (
     <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
