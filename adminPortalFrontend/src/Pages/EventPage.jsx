@@ -20,6 +20,7 @@ export default function EventPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent({ ...event, [name]: value });
+  
   };
 
   const handleAddingEvent =  async(e)=>
@@ -27,6 +28,7 @@ export default function EventPage() {
    try{
    e.preventDefault()
    await handleEventAdding({event})
+   navigate('/eventDisplay')
    
    }   
    catch(error)

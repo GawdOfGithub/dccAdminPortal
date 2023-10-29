@@ -1,10 +1,17 @@
 // AuthContext.js
 import React, { createContext, useState } from 'react';
+import { useEffect } from 'react';
 const AuthContext = createContext();
 import useFetch from '../Helpers/useFetceher';
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const storedValue = localStorage.getItem('myValue');
+    if (storedValue) {
+      setUser(storedValue);
+    }
+  }, []);
   const  fetchData  = useFetch();
   const handleRegistration = async (username,password,email) => {
     const url = 'https://api-admin-dcc.onrender.com/user/signup';
@@ -26,6 +33,7 @@ const AuthProvider = ({ children }) => {
   
 
       console.log('Registration Successful:', userId, token);
+      localStorage.setItem('myValue', token);
       setUser(token)
       alert("You have successfully loged in as an admin")
     } catch (error) {
@@ -52,6 +60,7 @@ const AuthProvider = ({ children }) => {
 
       const { userId, token } = data;
          setUser(token) 
+         localStorage.setItem('myValue', token);
 
       console.log('Login Successful:', userId, token);
     } catch (error) {

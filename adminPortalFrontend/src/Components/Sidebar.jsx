@@ -13,6 +13,12 @@ const Sidebar = () => {
            
           </button>
           <Link
+            to="/register"
+            className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
+          >
+            REGISTER AS AN ADMIN
+          </Link>
+          <Link
             to="/eventDisplay"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
