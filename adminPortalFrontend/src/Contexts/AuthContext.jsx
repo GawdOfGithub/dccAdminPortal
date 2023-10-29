@@ -1,5 +1,5 @@
 // AuthContext.js
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { useEffect } from 'react';
 const AuthContext = createContext();
 import useFetch from '../Helpers/useFetceher';

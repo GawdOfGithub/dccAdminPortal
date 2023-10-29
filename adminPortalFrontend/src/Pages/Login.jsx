@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+
 import Loader from '../Components/Loader';
 export default function LogIn() {
   const [loading, setLoading] = useState(false);
