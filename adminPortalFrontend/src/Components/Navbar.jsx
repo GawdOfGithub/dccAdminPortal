@@ -31,7 +31,7 @@ const Navbar = () => {
               </Link>
               <button className="bg-black text-white">
                 <span>
-                  <img src="dcc.svg" style={{ height: "30px", width: "30px" }} alt="logo" />
+                  {/* <img src="dcc.png" style={{ height: "30px", width: "30px" }} alt="logo" /> */}
                 </span>
               </button>
               <div className="flex">
