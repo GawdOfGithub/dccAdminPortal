@@ -3,23 +3,13 @@ import Sidebar from "./Sidebar";
 import useAuth from "../Helpers/useAuthContext";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import useWindowSize from "../Helpers/useWindow";
 const Navbar = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { width } = useWindowSize();
+  const isSmallScreen = width < 800; 
   const { user, setUser,logout } = useAuth();
   const { toggleSidebar, setToggleSidebar } = useMainContext();
 
-  useEffect(() => {
-    const handleWindowSizeChange = () => {
-
-      setIsSmallScreen(window.innerWidth < 800);
-    };
-    window.addEventListener("resize", handleWindowSizeChange);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []); // Adding an empty dependency array to run this effect only once
 
   return (
     <>
