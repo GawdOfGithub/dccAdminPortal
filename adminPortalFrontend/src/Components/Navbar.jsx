@@ -2,13 +2,15 @@ import useMainContext from "../Helpers/useMainContext";
 import Sidebar from "./Sidebar";
 import useAuth from "../Helpers/useAuthContext";
 import { useState, useEffect } from "react";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import { Link } from "react-router-dom";
 import useWindowSize from "../Helpers/useWindow";
 const Navbar = () => {
   const { width } = useWindowSize();
   const isSmallScreen = width < 800; 
   const { user, setUser,logout } = useAuth();
-  const { toggleSidebar, setToggleSidebar } = useMainContext();
+  const { toggleSidebar, setToggleSidebar,theme,setTheme } = useMainContext();
 
 
   return (
@@ -36,6 +38,11 @@ const Navbar = () => {
               </button>
               <div className="flex">
                 <span>👤</span>
+                {!theme? 
+                (<button onClick={()=>setTheme(!theme)}><LightModeIcon/></button>
+                ) : (
+                  <button onClick={()=>setTheme(!theme)}><DarkModeIcon/></button>
+                )}
                 {!user ? (
                   <Link to="/signIn" className="bg-black text-white font-semibold">
                     <span>SignIn</span>
@@ -54,7 +61,7 @@ const Navbar = () => {
 
 <>
           
-          <div className="fixed w-full bg-black min-h-content text-white z-20">
+          <div className="fixed w-full bg-gray-900 min-h-content text-white z-0">
             <div className="flex justify-between items-center px-4 py-2">
               <div className="text-2xl">
                 <button
@@ -88,6 +95,11 @@ const Navbar = () => {
                   <img src="dcc.svg" style={{ height: "30px", width: "30px" }} alt="logo" />
                 </span>
               </button>
+              {!theme? 
+                (<button onClick={()=>setTheme(!theme)}><LightModeIcon/></button>
+                ) : (
+                  <button onClick={()=>setTheme(!theme)}><DarkModeIcon/></button>
+                )}
               <div className="flex">
                 <span>👤</span>
                 {!user ? (

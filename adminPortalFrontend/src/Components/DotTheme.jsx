@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
+import useMainContext from '../Helpers/useMainContext';
+
 const DotsTheme = () => {
+  
+  const {theme} = useMainContext()
   const particlesInit = async (main) => {
     console.log(main);
     await loadFull(main);
@@ -9,6 +13,8 @@ const DotsTheme = () => {
   const particlesLoaded = (container) => {
     console.log(container);
   };
+  const backgroundMaskValue = !theme ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
+  console.log(theme);
   return (
     <div className='App'>
       <Particles
@@ -19,15 +25,12 @@ const DotsTheme = () => {
           backgroundMask: {
             enable: true,
             cover: {
-              value: {
-                r: 255,
-                g: 255,
-                b: 255,
-              },
-            },
+              value: backgroundMaskValue,
+          },
           },
           background: {
-            color: '#0000ff',
+             color: !theme ?  '#ffffffff': '#000000',
+           // color: '#000000',
             size: '100% 100%',
             repeat: 'no-repeat',
           },
