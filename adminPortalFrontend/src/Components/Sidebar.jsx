@@ -12,42 +12,42 @@ const Sidebar = () => {
           <button className="border-b border-gray-500 text-white text-xl font-semibold py-2" onClick={()=>setToggleSidebar(false)}>
            
           </button>
-          <Link
+          {/* <Link
             to="/register"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
             REGISTER AS AN ADMIN
-          </Link>
+          </Link> */}
           <Link
             to="/eventDisplay"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
-            DCC EVENTS
+            CHECK EVENTS
           </Link>
           <Link
             to="/eventPage"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
-          DCC EVENT FORM
+          ADD A NEW EVENT
           </Link>
           <a
-            href="/"
+            href="/https://dccnita.tech/"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
             DCC NITA WEBSITE
           </a>
           <a
-            href="/"
+            href="/https://cphub.dccnita.tech/"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
             CP HUB
           </a>
-          <a
+          {/* <a
             href="/"
             className="block border-b border-gray-500 text-white text-xl font-semibold py-2 mt-6 hover:text-yellow-500 transition duration-300"
           >
             OTHER RESOURCES
-          </a>
+          </a> */}
          
         </div>
       </div>

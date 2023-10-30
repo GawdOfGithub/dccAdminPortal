@@ -46,7 +46,7 @@ if(user)
 {
   return(
   <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
-  <div className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
+  <div className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 min-h-screen flex flex-col items-center justify-center min-h-screen ">
     <div className="mb-4">
       <p className="text-center text-2xl font-extrabold text-black">
         You are already logged in as an admin.

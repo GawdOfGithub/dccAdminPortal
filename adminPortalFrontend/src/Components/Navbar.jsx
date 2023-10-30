@@ -28,14 +28,11 @@ const Navbar = () => {
                   {!toggleSidebar ? <span>☰</span> : <span>✕</span>}
                 </button>
               </div>
-              <Link to="/eventPage" className="text-white text-xl font-bold">
-                <span>EventForm</span>
+              <Link to="/eventPage" className="text-white text-xl font-bold  hover:text-yellow-500 transition duration-300">
+                <span>Add events</span>
               </Link>
-              <button className="bg-black text-white">
-                <span>
-                  {/* <img src="dcc.svg" style={{ height: "30px", width: "30px" }} alt="logo" /> */}
-                </span>
-              </button>
+             
+            
               {!theme? 
                 (<button onClick={()=>setTheme(!theme)}><LightModeIcon/></button>
                 ) : (
@@ -72,26 +69,29 @@ const Navbar = () => {
                   
                 </button>
               </div>
-              <Link to="/register" className="text-white text-xl font-bold">
+              {/* <Link to="/register" className="text-white text-xl font-bold">
                 <span>Register</span>
+              </Link> */}
+              <Link to="/eventDisplay" className="text-white text-xl font-bold  hover:text-yellow-500 transition duration-300">
+                <span>CHECK EVENTS</span>
               </Link>
-              <Link to="/eventPage" className="text-white text-xl font-bold">
-                <span>EventForm</span>
+              <Link to="/eventPage" className="text-white text-xl font-bold  hover:text-yellow-500 transition duration-300">
+                <span>ADD EVENTS</span>
               </Link>
-              <Link to="/" className="text-white text-xl font-bold">
+              <a href="https://dccnita.tech/" className="text-white text-xl font-bold hover:text-yellow-500 transition duration-300"  >
                 <span>DCC NITA</span>
-              </Link>
-              <Link to="/" className="text-white text-xl font-bold">
+              </a>
+              {/* <Link to="/" className="text-white text-xl font-bold">
                 <span>21 DAYS CHALLENGE</span>
-              </Link>
-              <Link to="/" className="text-white text-xl font-bold">
+              </Link> */}
+              <a href="https://cphub.dccnita.tech/" className="text-white text-xl font-bold  hover:text-yellow-500 transition duration-300">
                 <span>CP HUB</span>
-              </Link>
-              <Link to="/" className="text-white text-xl font-bold">
+              </a>
+              {/* <Link to="/" className="text-white text-xl font-bold">
                 <span>CATCH THE FLAG</span>
-              </Link>
+              </Link> */}
             
-              <button className="bg-black text-white">
+              <button className="bg-black text-white hover:text-yellow-500 transition duration-300">
                 <span>
                   <img src="dcc.svg" style={{ height: "30px", width: "30px" }} alt="logo" />
                 </span>

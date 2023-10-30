@@ -34,7 +34,7 @@ export const EventDisplay = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 640) {
-        setZoomLevel(0.52);
+        setZoomLevel(0.65);
       } else {
         setZoomLevel(1);
       }
