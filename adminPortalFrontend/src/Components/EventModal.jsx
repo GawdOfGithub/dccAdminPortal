@@ -4,7 +4,7 @@ const EventModal = ({ handleConfirmation }) => {
   const { setShowModal } = useMainContext();
 
   const handleConfirmationAction = async (confirmation) => {
-    await handleConfirmation(confirmation); 
+    await handleConfirmation(confirmation);
     setShowModal(false);
   };
 
