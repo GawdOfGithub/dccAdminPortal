@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from '../Components/AlertModal';
+import EventModal from '../Components/EventModal';
 
 export default function EventPage() {
-
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [modalText, setModalText] = useState('');
   
   const navigate = useNavigate()
   const {handleEventAdding,user} = useAuth()
@@ -18,7 +21,7 @@ export default function EventPage() {
     eventLink: '',
   });
 
-  // eventHeading,eventDesc,eventDate,eventTime,eventLocation,eventImgUrl,eventLink
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent({ ...event, [name]: value });
@@ -27,10 +30,53 @@ export default function EventPage() {
 
   const handleAddingEvent =  async(e)=>
   {
-    if (event.eventHeading === '') {
-     alert("You cannot add an event without a heading")
-      return;
+    
+      e.preventDefault()
+      if (event.eventHeading === '') {
+        setModalText('Heading');
+        setShowAlertModal(true);
+        return;
+    
     }
+    if (event.eventDesc === '') {
+      setModalText('Description');
+        setShowAlertModal(true);
+       return;
+     
+     }
+    
+    
+    
+    if (event.eventDate === '') {
+      setModalText('Date');
+      setShowAlertModal(true);
+       return;
+     
+     }
+     if (event.eventTime === '') {
+      setModalText('Time');
+      setShowAlertModal(true);
+       return;
+     
+     }
+     if (event.eventLocation === '') {
+      setModalText('Location');
+        setShowAlertModal(true);
+       return;
+     
+     }
+     if (event.ImageURL === '') {
+      setModalText('ImgUrl');
+        setShowAlertModal(true);
+       return;
+     
+     }
+     if (event.eventLink === '') {
+      setModalText('EventLink');
+        setShowAlertModal(true);
+       return;
+     
+     }
    try{
    e.preventDefault()
    await handleEventAdding({event})
@@ -43,8 +89,18 @@ export default function EventPage() {
     console.log("Registration failed");
    }
   }
-
+if(showAlertModal)
+{
+  return(
+    <AlertModal
+    showAlertModal={showAlertModal}
+    setShowAlertModal={setShowAlertModal}
+    text={modalText}
+  />
+  )
+}
   return (
+    <>
     <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
       <form className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 min-h-">
         <div className="mb-4">
@@ -56,10 +112,11 @@ export default function EventPage() {
             id="eventHeading"
             type="text"
             name="eventHeading"
-            placeholder="Event Heading"
+            placeholder="heading"
             value={event.eventHeading}
             onChange={handleChange}
           />
+          
         </div>
         <div className="mb-4">
           <textarea
@@ -155,5 +212,6 @@ export default function EventPage() {
         </p>
       </div>
     </div>
+    </>
   );
 }
