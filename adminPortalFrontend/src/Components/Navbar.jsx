@@ -36,13 +36,14 @@ const Navbar = () => {
                   {/* <img src="dcc.svg" style={{ height: "30px", width: "30px" }} alt="logo" /> */}
                 </span>
               </button>
-              <div className="flex">
-                <span>👤</span>
-                {!theme? 
+              {!theme? 
                 (<button onClick={()=>setTheme(!theme)}><LightModeIcon/></button>
                 ) : (
                   <button onClick={()=>setTheme(!theme)}><DarkModeIcon/></button>
                 )}
+              <div className="flex">
+                <span>👤</span>
+               
                 {!user ? (
                   <Link to="/signIn" className="bg-black text-white font-semibold">
                     <span>SignIn</span>
