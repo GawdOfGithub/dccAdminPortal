@@ -11,10 +11,9 @@ const DotsTheme = () => {
     await loadFull(main);
   };
   const particlesLoaded = (container) => {
-    console.log(container);
+  
   };
   const backgroundMaskValue = !theme ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
-  console.log(theme);
   return (
     <div className='App'>
       <Particles
@@ -29,7 +28,7 @@ const DotsTheme = () => {
           },
           },
           background: {
-             color: !theme ?  '#ffffffff': '#000000',
+             color: !theme ?  '#fffffff': '#000000',
            // color: '#000000',
             size: '100% 100%',
             repeat: 'no-repeat',

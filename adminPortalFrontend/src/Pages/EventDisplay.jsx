@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import useAuth from "../Helpers/useAuthContext";
+import useMainContext from "../Helpers/useMainContext";
 import Loader from "../Components/Loader";
+import  DeleteModal  from "../Components/DeleteModal";
 export const EventDisplay = () => {
   const {user,deletingEvent} = useAuth()
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -8,18 +10,27 @@ export const EventDisplay = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-   const handleDelete = async (id)=>
-   {
-    try
-    {
-   
-    await deletingEvent(id)
+  const {showModal,setShowModal} = useMainContext()
+  
+  
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  const handleDelete = (id) => {
+    setSelectedItemId(id);
+    setShowModal(true);
+  };
+
+  const handleConfirmation = async (confirmation) => {
+    if (confirmation) {
+      console.log(selectedItemId);
+      setLoading(true);
+      await deletingEvent(selectedItemId);
     }
-    catch(error)
-    {
-     console.log(error);
-    }
-   }
+    setLoading(false);
+    setShowModal(false);
+    setSelectedItemId(null);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 640) {
@@ -68,6 +79,13 @@ export const EventDisplay = () => {
 
   if (error) {
     return <div>Error: {error.message}</div>;
+  }
+  
+  if(showModal)
+  {
+    return(
+      <DeleteModal handleConfirmation={handleConfirmation} />
+    )
   }
   
     return (

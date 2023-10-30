@@ -4,6 +4,8 @@ import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function EventPage() {
+
+  
   const navigate = useNavigate()
   const {handleEventAdding,user} = useAuth()
   const [event, setEvent] = useState({
@@ -25,6 +27,10 @@ export default function EventPage() {
 
   const handleAddingEvent =  async(e)=>
   {
+    if (event.eventHeading === '') {
+     alert("You cannot add an event without a heading")
+      return;
+    }
    try{
    e.preventDefault()
    await handleEventAdding({event})

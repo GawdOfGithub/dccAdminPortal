@@ -46,7 +46,7 @@ if(user)
 {
   return(
   <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
-  <div className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 min-h-">
+  <div className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
     <div className="mb-4">
       <p className="text-center text-2xl font-extrabold text-black">
         You are already logged in as an admin.
@@ -73,7 +73,7 @@ if(user)
     <>
   
     <div className="w-1/2 min-h-screen mx-auto mt-40 min-w-fit">
-      <form className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 min-h-">
+      <form className="bg-slate-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 min-h-fit">
         <div className="mb-4">
           <label className='flex justify-center mb-4 text-black text-2xl font-extrabold'>Let's GO 🚀<span></span></label>
           <input
@@ -84,7 +84,7 @@ if(user)
             onChange={(e)=>setEmail(e.target.value)}
           />
         </div>
-        <div className="mb-6">
+        <div className="mb-1">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
             id="password"
@@ -92,15 +92,18 @@ if(user)
             placeholder="Password"
             onChange={(e)=>setPassword(e.target.value)}
           />
-          <button type="button" className='flex justify-center items-center ml-28 mt-3 hover:bg-black' onClick={()=>setVisibility(!visibility)}>
-            {visibility ? <VisibilityIcon /> : <VisibilityOffIcon />}
-          </button>
+         
         </div>
-        <div className="mb-4">
+        <div className='flex items-center justify-center mb-2'>
+        <button type="button" className=' mt-3   hover:bg-blue-300 ' onClick={()=>setVisibility(!visibility)}>
+           <span className=''> {visibility ? <VisibilityIcon /> : <VisibilityOffIcon />}</span>
+          </button>
+          </div>
+        {/* <div className="mb-4">
           <Link to="/resetPassword" className="text-blue-500 hover:underline">
             Forgot your password? Reset it here.
           </Link>
-        </div>
+        </div> */}
         <div className="flex items-center justify-center">
           <button
             className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -111,12 +114,12 @@ if(user)
         </div>
       </form>
       <div className="text-center">
-        <p className="text-gray-600 text-sm">
+        {/* <p className="text-gray-600 text-sm">
           Don't have an account?{' '}
           <Link to="/register" className="text-blue-500 hover:text-red-500 z-40">
             Register now
           </Link>
-        </p>
+        </p> */}
       </div>
       <div className="text-center mt-5">
         
