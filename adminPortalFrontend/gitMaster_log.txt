@@ -1,3 +1,4 @@
 branch newBranch was made the master
 branch final was made the master
 branch final_update was made the master
+branch checkpoint_latest was made the master

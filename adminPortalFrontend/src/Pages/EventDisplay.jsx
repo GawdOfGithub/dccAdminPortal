@@ -66,7 +66,7 @@ export const EventDisplay = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures it runs only once on initial render
+  }, []); 
 
   const style = {
     transform: `scale(${zoomLevel})`,
