@@ -4,7 +4,7 @@ import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../Components/AlertModal';
 import EventModal from '../Components/EventModal';
-
+import { useEffect } from 'react';
 export default function EventPage() {
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [modalText, setModalText] = useState('');
@@ -19,6 +19,7 @@ export default function EventPage() {
     eventLocation: '',
     eventImgUrl: '',
     eventLink: '',
+    imageFile: null,
   });
 
 
@@ -27,6 +28,31 @@ export default function EventPage() {
     setEvent({ ...event, [name]: value });
   
   };
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setEvent({
+        ...event,
+        imageFile: file,
+      });
+      const reader = new FileReader();
+      reader.onload = () => {
+        setEvent((prevEvent) => ({
+          ...prevEvent,
+          eventImgUrl: reader.result, // Update eventImgUrl directly
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (event.eventImgUrl) {
+        URL.revokeObjectURL(event.eventImgUrl);
+      }
+    };
+  }, [event.eventImgUrl]);
 
   const handleAddingEvent =  async(e)=>
   {
@@ -167,11 +193,12 @@ if(showAlertModal)
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
             id="eventImageURL"
-            type="text"
+            type="file"
+            accept="image/*"
             name="eventImgUrl"
             placeholder="Event Image URL"
             value={event.eventImgUrl}
-            onChange={handleChange}
+            onChange={handleImageUpload}
           />
         </div>
         <div className="mb-4">
