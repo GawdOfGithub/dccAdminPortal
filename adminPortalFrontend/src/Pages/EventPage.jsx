@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../Components/AlertModal';
-import EventModal from '../Components/EventModal';
-
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {imageDb} from '../../firebase' // Import your Firebase configuration
+import {v4} from "uuid"
 export default function EventPage() {
+ 
+
+
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [modalText, setModalText] = useState('');
-  
-  const navigate = useNavigate()
-  const {handleEventAdding,user} = useAuth()
+  const navigate = useNavigate();
+  const { handleEventAdding, user } = useAuth();
   const [event, setEvent] = useState({
     eventHeading: '',
     eventDesc: '',
@@ -19,13 +22,47 @@ export default function EventPage() {
     eventLocation: '',
     eventImgUrl: '',
     eventLink: '',
+    imageFile: null,
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent({ ...event, [name]: value });
-  
+  };
+
+  const handleImageUpload = async (e) => {
+    try {
+      const file = e.target.files[0];
+
+      if (file) {
+      console.log(file);
+        const imageRef = ref(imageDb, `files/${v4()}`);
+        const uploadTask = uploadBytesResumable(imageRef, file);
+
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+                    },
+          (error) => {
+            console.error('Error during upload:', error);
+          },
+          async () => {
+            try {
+              const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+              setEvent({
+                ...event,
+                imageFile: file,
+                eventImgUrl: downloadURL,
+              });
+            } catch (error) {
+              console.error('Error getting download URL:', error);
+            }
+          }
+        );
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
 
   const handleAddingEvent =  async(e)=>
@@ -167,11 +204,12 @@ if(showAlertModal)
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-slate-200"
             id="eventImageURL"
-            type="text"
+            type="file"
+            accept="image/*"
             name="eventImgUrl"
             placeholder="Event Image URL"
             value={event.eventImgUrl}
-            onChange={handleChange}
+            onChange={handleImageUpload}
           />
         </div>
         <div className="mb-4">
