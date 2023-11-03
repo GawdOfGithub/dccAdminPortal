@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import useAuth from '../Helpers/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../Components/AlertModal';
-import EventModal from '../Components/EventModal';
 import axios from 'axios';
-import { useEffect } from 'react';
+
 const EventPage = () => {
+const CLOUD_NAME = import.meta.env.VITE_APP_CLOUD_NAME
+const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [modalText, setModalText] = useState('');
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const EventPage = () => {
     eventDate: '',
     eventTime: '',
     eventLocation: '',
-    eventImgUrl: '', // Store the Cloudinary URL here
+    eventImgUrl: '', 
     eventLink: '',
   });
 
@@ -36,11 +37,11 @@ const EventPage = () => {
     
       const formData = new FormData();
       formData.append('file', image);
-      formData.append('upload_preset', 'xv5ikkcr'); 
-      formData.append('cloud_name', 'dhzod7y8u'); 
+      formData.append('upload_preset',CLOUD_PRESET);
+      formData.append('cloud_name',CLOUD_NAME);
 
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/dhzod7y8u/image/upload`,
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
         formData
       );
 

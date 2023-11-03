@@ -29,6 +29,6 @@ const DeleteModal = ({ handleConfirmation }) => {
       </div>
     </div>
   );
-};
+};    
 
 export default DeleteModal;
