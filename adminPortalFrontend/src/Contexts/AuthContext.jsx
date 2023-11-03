@@ -70,6 +70,7 @@ const AuthProvider = ({ children }) => {
   };
   const handleEventAdding = async ({ event }) => {
     try {
+      console.log(event);
       const url = 'https://api-admin-dcc.onrender.com/events/add';
       const token = user; 
   
@@ -79,6 +80,7 @@ const AuthProvider = ({ children }) => {
           'Content-Type': 'application/json',
           Authorization: token, 
         },
+        
         body: JSON.stringify(event), 
       };
   

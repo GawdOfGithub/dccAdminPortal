@@ -105,7 +105,7 @@ export const EventDisplay = () => {
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
-                  <img src="dcc.svg" alt={item.heading} className="w-10 h-10 rounded-full" />
+                  <img src={item.imageURL} alt={item.heading} className="w-10 h-10 rounded-full" />
                   <div className="ml-4">
                     <div className="text-sm font-medium text-gray-900">{item.heading}</div>
                     {/* <div className="text-sm text-gray-500">{item.description}</div> */}
