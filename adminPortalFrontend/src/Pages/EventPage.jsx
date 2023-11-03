@@ -87,10 +87,12 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
         }, 0);
       } else {
         console.error('Image upload failed');
-        setModalText('ImgUrl');
+        setModalText("Please click on the add event button once again ");
         setShowAlertModal(true);
       }
     } catch (error) {
+      setModalText("Please click on the add event button once again ");
+        setShowAlertModal(true);
       console.error('Registration failed:', error);
     }
   };
