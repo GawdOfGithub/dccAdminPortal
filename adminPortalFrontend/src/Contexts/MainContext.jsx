@@ -8,6 +8,7 @@ export default function MainContextProvider({ children }) {
   const [confirm, setConfirm] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [theme, setTheme] = useState(true);
+  const[isDisabled,setIsDisabled] = useState(false)
 
   const setConfirmation = () => {
     return new Promise((resolve, reject) => {
@@ -45,6 +46,8 @@ export default function MainContextProvider({ children }) {
         setConfirmation,
         setRejection,
         setConfirm,
+        isDisabled,
+        setIsDisabled
       }}
     >
       {children}

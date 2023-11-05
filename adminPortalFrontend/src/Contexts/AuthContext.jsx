@@ -7,6 +7,8 @@ import useFetch from '../Helpers/useFetceher';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
+  const [navigateToDisplay, setnavigateToDisplay] = useState(false);
+  
   useEffect(() => {
     const storedValue = localStorage.getItem('myValue');
     if (storedValue) {
@@ -91,13 +93,14 @@ const AuthProvider = ({ children }) => {
       console.log('Response from server:', data);
   
       if (!response.ok) {
-        console.error('Failed to add the event to the backend');
+        alert("image upload failed click on the add event button once again ");
         return;
       }
   
-      alert("Event has been added successfully go to the event page to check the newly added event");
+      alert("success")
+      setnavigateToDisplay(true)
     } catch (error) {
-      alert("failed to add the event please try adding once again ");
+    
       console.error('Fetch Error:', error);
     }
   };
@@ -138,7 +141,7 @@ const AuthProvider = ({ children }) => {
   };
   
   return (
-    <AuthContext.Provider value={{ user, setUser, handleRegistration,handleLogin,handleEventAdding,deletingEvent,logout }}>
+    <AuthContext.Provider value={{ user, setUser, handleRegistration,handleLogin,handleEventAdding,deletingEvent,logout,navigateToDisplay }}>
       {children}
     </AuthContext.Provider>
   );

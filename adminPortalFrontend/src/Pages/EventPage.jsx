@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../Helpers/useAuthContext';
+import useMainContext from '../Helpers/useMainContext';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../Components/AlertModal';
 import axios from 'axios';
@@ -11,7 +12,8 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [modalText, setModalText] = useState('');
   const navigate = useNavigate();
-  const { handleEventAdding, user } = useAuth();
+  const { handleEventAdding, user,navigateToDisplay } = useAuth();
+  const {isDisabled,setIsDisabled} = useMainContext()
 
   const [event, setEvent] = useState({
     eventHeading: '',
@@ -22,6 +24,11 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
     eventImgUrl: '', 
     eventLink: '',
   });
+
+  if(navigateToDisplay)
+  {
+    navigate("eventDisplay")
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,6 +82,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
       const uploadedImageUrl = await handleImageUpload(event.eventImgUrl);
    
       if (uploadedImageUrl) {
+        setIsDisabled(true)
         console.log(uploadedImageUrl);
         setEvent(prevEvent => {
           const updatedEvent = { ...prevEvent, eventImgUrl: uploadedImageUrl };
@@ -83,8 +91,9 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
         });
         setTimeout(async () => {
           await handleEventAdding({ event });
-          //navigate('/eventDisplay');
-        }, 5000);
+          setIsDisabled(false)
+        
+        }, 1000);
      
       } else {
         console.error('Image upload failed');
@@ -197,9 +206,11 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
                 onClick={handleAddingEvent}
                 className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
+                disabled={isDisabled}
               >
-                ADD EVENT
+                {!isDisabled ?"ADD EVENT":"Trying to add the event"}
               </button>
+              
             ) : (
               <Link
                 to="/signIn"
