@@ -66,7 +66,7 @@ export const EventDisplay = () => {
     };
 
     fetchData();
-  }, [loading]); 
+  }, [showModal]); 
 
   const style = {
     transform: `scale(${zoomLevel})`,
