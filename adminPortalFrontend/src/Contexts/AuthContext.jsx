@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 const AuthContext = createContext();
 import useFetch from '../Helpers/useFetceher';
 
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
   useEffect(() => {
@@ -94,8 +95,9 @@ const AuthProvider = ({ children }) => {
         return;
       }
   
-      console.log('Successfully added the event to the backend:', data);
+      alert("Event has been added successfully go to the event page to check the newly added event");
     } catch (error) {
+      alert("failed to add the event please try adding once again ");
       console.error('Fetch Error:', error);
     }
   };

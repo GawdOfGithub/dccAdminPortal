@@ -84,7 +84,8 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
         setTimeout(async () => {
           await handleEventAdding({ event });
           //navigate('/eventDisplay');
-        }, 0);
+        }, 5000);
+     
       } else {
         console.error('Image upload failed');
         setModalText("Please click on the add event button once again ");
