@@ -5,6 +5,7 @@ import useMainContext from '../Helpers/useMainContext';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../Components/AlertModal';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const EventPage = () => {
 const CLOUD_NAME = import.meta.env.VITE_APP_CLOUD_NAME
@@ -12,7 +13,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [modalText, setModalText] = useState('');
   const navigate = useNavigate();
-  const { handleEventAdding, user,navigateToDisplay } = useAuth();
+  const { handleEventAdding, user,navigateToDisplay,setnavigateToDisplay} = useAuth();
   const {isDisabled,setIsDisabled} = useMainContext()
 
   const [event, setEvent] = useState({
@@ -24,12 +25,13 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
     eventImgUrl: '', 
     eventLink: '',
   });
-
+  
+  
   if(navigateToDisplay)
   {
     navigate("/eventDisplay")
   }
-   
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -204,14 +206,23 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
           </div>
           <div className="flex items-center justify-center">
             {user ? (
+              <>
               <button
                 onClick={handleAddingEvent}
                 className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 disabled={isDisabled}
+              
               >
-                {!isDisabled ?"ADD EVENT":"Trying to add the event"}
-              </button>
+              { isDisabled?"Adding....":"ADD EVENT"}
+                </button>
+               
+                {isDisabled &&<div className="absolute inset-0 flex items-center justify-center">
+  <div className="animate-spin rounded-full border-t-4 border-r-4 border-b-4 border-blue-800 h-20 w-20"></div>
+</div>
+}
+             
+             </>
               
             ) : (
               <Link

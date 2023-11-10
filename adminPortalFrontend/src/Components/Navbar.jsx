@@ -9,7 +9,7 @@ import useWindowSize from "../Helpers/useWindow";
 const Navbar = () => {
   const { width } = useWindowSize();
   const isSmallScreen = width < 800; 
-  const { user, setUser,logout } = useAuth();
+  const { user, setUser,logout} = useAuth();
   const { toggleSidebar, setToggleSidebar,theme,setTheme } = useMainContext();
 
 
