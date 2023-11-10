@@ -7,7 +7,7 @@ export default function MainContextProvider({ children }) {
   const [showModal, setShowModal] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState(false);
   const[isDisabled,setIsDisabled] = useState(false)
 
   const setConfirmation = () => {

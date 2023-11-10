@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
       console.log('Registration Successful:', userId, token);
       localStorage.setItem('myValue', token);
       setUser(token)
-      alert("You have successfully loged in as an admin")
+      alert("You have successfully logged in as an admin")
     } catch (error) {
       // Handle fetch error
       console.error('Fetch Error:', error);

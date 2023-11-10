@@ -29,6 +29,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   {
     navigate("/eventDisplay")
   }
+   
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,11 +90,12 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
           console.log(updatedEvent); 
           return updatedEvent; 
         });
+    
         setTimeout(async () => {
           await handleEventAdding({ event });
           setIsDisabled(false)
         
-        }, 1000);
+        }, 0);
      
       } else {
         console.error('Image upload failed');
