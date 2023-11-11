@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import AlertModal from '../Components/AlertModal';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const EventPage = () => {
+
 const CLOUD_NAME = import.meta.env.VITE_APP_CLOUD_NAME
 const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   const [showAlertModal, setShowAlertModal] = useState(false);
@@ -26,12 +28,16 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
     eventLink: '',
   });
   
-  
-  if(navigateToDisplay)
+  useAuth(()=>
   {
-    navigate("/eventDisplay")
-    setnavigateToDisplay(false)
-  }
+    if(navigateToDisplay)
+    {
+      navigate("/eventDisplay")
+      setnavigateToDisplay(false)
+    }
+
+  },[navigateToDisplay,navigate])
+  
  
 
   const handleChange = (e) => {
@@ -84,7 +90,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
 
     try {
       const uploadedImageUrl = await handleImageUpload(event.eventImgUrl);
-   
+     console.log(uploadedImageUrl);
       if (uploadedImageUrl) {
         setIsDisabled(true)
         console.log(uploadedImageUrl);
@@ -93,12 +99,11 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
           console.log(updatedEvent); 
           return updatedEvent; 
         });
-    
-        setTimeout(async () => {
-          await handleEventAdding({ event });
-          setIsDisabled(false)
+         
         
-        }, 0);
+          
+        
+     
      
       } else {
         console.error('Image upload failed');
@@ -111,6 +116,23 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
       console.error('Registration failed:', error);
     }
   };
+  useEffect(() => {
+    const addEvent = async () => {
+      try {
+        await handleEventAdding({ event });
+        setIsDisabled(false);
+        navigate("/eventDisplay")
+      } catch (error) {
+        console.error('Registration failed:', error);
+        setModalText('Please click on the add event button once again ');
+        setShowAlertModal(true);
+      }
+    };
+
+    if (isDisabled) {
+      addEvent();
+    }
+  }, [isDisabled, event, handleEventAdding,setIsDisabled]);
   
   return (
     <>
@@ -193,6 +215,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
                 const file = e.target.files[0];
                 setEvent({ ...event, eventImgUrl: file });}}
             />
+        
           </div>
           <div className="mb-4">
             <input
@@ -222,7 +245,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   <div className="animate-spin rounded-full border-t-4 border-r-4 border-b-4 border-blue-800 h-20 w-20"></div>
 </div>
 }
-             
+          
              </>
               
             ) : (

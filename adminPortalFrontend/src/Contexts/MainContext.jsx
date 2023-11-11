@@ -21,17 +21,7 @@ export default function MainContextProvider({ children }) {
     });
   };
 
-  const setRejection = () => {
-    return new Promise((resolve, reject) => {
-      try {
-        setShowModal(true);
-        setConfirm(false);
-        resolve(); 
-      } catch (error) {
-        reject(error);
-      }
-    });
-  };
+ 
 
   return (
     <MainContext.Provider
@@ -44,7 +34,7 @@ export default function MainContextProvider({ children }) {
         setShowModal,
         confirm,
         setConfirmation,
-        setRejection,
+      
         setConfirm,
         isDisabled,
         setIsDisabled
