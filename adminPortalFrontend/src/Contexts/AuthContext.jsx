@@ -97,10 +97,9 @@ const AuthProvider = ({ children }) => {
         return;
       }
   
-      alert("success")
-      setnavigateToDisplay(true)
+      
     } catch (error) {
-    
+      console.log("failed to add event");
       console.error('Fetch Error:', error);
     }
   };
