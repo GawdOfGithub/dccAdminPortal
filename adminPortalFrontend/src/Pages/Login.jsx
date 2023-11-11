@@ -10,7 +10,7 @@ export default function LogIn() {
   const [loading, setLoading] = useState(false);
   const[email,setEmail] = useState("")
   const [password,setPassword] = useState("")
-  const {handleLogin,user} = useAuth()
+  const {handleLogin,user,logout} = useAuth()
   const [visibility, setVisibility] = useState(false);
  const navigate = useNavigate()
   const handleSignIn =  async(e)=>
