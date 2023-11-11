@@ -30,6 +30,7 @@ const CLOUD_PRESET= import.meta.env.VITE_APP_CLOUD_PRESET
   if(navigateToDisplay)
   {
     navigate("/eventDisplay")
+    setnavigateToDisplay(false)
   }
  
 
